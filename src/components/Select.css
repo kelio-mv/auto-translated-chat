@@ -1,0 +1,26 @@
+.select {
+    display: flex;
+    width: max-content;
+    gap: 1rem;
+    margin-bottom: var(--fs-largest);
+}
+
+.select.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.select .option {
+    padding: 6px 10px;
+    background: var(--bg-secondary);
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.select .option:hover {
+    background: var(--bg-tertiary);
+}
+
+.select .option.selected {
+    border: 1px solid var(--clr-text);
+}

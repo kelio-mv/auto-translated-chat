@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Gantari:wght@400;500;600&display=swap");
+
+:root {
+  --bg-primary: rgb(32, 34, 37);
+  --bg-secondary: rgb(47, 49, 54);
+  --bg-tertiary: rgb(54, 57, 63);
+  --clr-text: rgb(246, 247, 248);
+  --fs-medium: 18px;
+  --fs-large: 20px;
+  --fs-largest: 36px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background: var(--bg-primary);
+  color: var(--clr-text);
+  height: 100vh;
+  font: var(--fs-medium) "Gantari", sans-serif;
+}

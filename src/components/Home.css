@@ -1,0 +1,30 @@
+#app-title {
+    font-size: var(--fs-largest);
+    margin-bottom: 1em;
+}
+
+#label-select-lang {
+    font-size: var(--fs-large);
+    font-weight: 500;
+    margin-bottom: 1em;
+}
+
+button {
+    padding: 6px 36px;
+    background: var(--bg-secondary);
+    color: inherit;
+    border: 2px solid var(--bg-tertiary);
+    outline: none;
+    font: inherit;
+    font-size: var(--fs-large);
+    font-weight: 500;
+}
+
+button:disabled {
+    opacity: 0.5;
+}
+
+button:hover:not(:disabled) {
+    background: var(--bg-tertiary);
+    cursor: pointer;
+}

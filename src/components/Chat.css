@@ -1,0 +1,41 @@
+#messages {
+    flex: 1 0 auto;
+}
+
+#retranslation {
+    background: var(--bg-tertiary);
+    width: calc(100% - 1rem);
+    padding: 6px 10px;
+    margin-bottom: 1rem;
+}
+
+#input-area {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    background: var(--bg-secondary);
+}
+
+#message-input {
+    flex: 1 0 auto;
+    padding: 0px 20px;
+    background: transparent;
+    color: var(--clr-text);
+    font: inherit;
+    border: none;
+    outline: none;
+}
+
+#send-message-btn {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 46px;
+    height: 46px;
+    cursor: pointer;
+}
+
+#send-message-btn img {
+    width: 23px;
+}
