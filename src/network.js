@@ -1,6 +1,6 @@
 export default class Network {
   constructor() {
-    this.defaultPort = 2824;
+    // this.defaultPort = 5000;
     this.active = false;
     this.onopen = () => {};
     this.onmessage = () => {};
@@ -8,8 +8,10 @@ export default class Network {
     setInterval(this.checkState, 3000);
   }
 
-  connect = (ipAddress, port) => {
-    this.address = `wss://${ipAddress}:${port || this.defaultPort}`;
+  connect = (address, port) => {
+    // this.address = `ws://${address}:${port || this.defaultPort}`;
+    // this.socket = new WebSocket(this.address);
+    this.address = `wss://${address}.glitch.me/`;
     this.socket = new WebSocket(this.address);
     this.socket.onopen = this._onopen;
     this.socket.onmessage = this._onmessage;

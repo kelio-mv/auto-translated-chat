@@ -1,13 +1,15 @@
-import translate from "google-translate-api-x";
+import fetch from "node-fetch";
 
-export async function translateText(sourceText, sourceLang, destLang) {
-  const res = await translate(sourceText, { from: sourceLang, to: destLang });
-  return res.text;
+export async function translate(text, sourceLang, destLang) {
+  const endpoint = "https://translate.googleapis.com/translate_a/single";
+  const response = await fetch(
+    `${endpoint}?client=gtx&sl=${sourceLang}&tl=${destLang}&dt=t&q=${encodeURIComponent(text)}`
+  );
+  const data = await response.json();
+  return data[0][0][0];
 }
 
-export async function retranslateText(sourceText, sourceLang, destLang) {
-  let res = await translate(sourceText, { from: sourceLang, to: destLang });
-  const translated = res.text;
-  res = await translate(translated, { from: destLang, to: sourceLang });
-  return res.text;
+export async function retranslate(text, sourceLang, destLang) {
+  const translation = await translate(text, sourceLang, destLang);
+  return translate(translation, destLang, sourceLang);
 }

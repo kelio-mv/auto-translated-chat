@@ -22,7 +22,9 @@ export default class Chat extends React.Component {
           break;
 
         case "input-retranslated":
-          this.setState({ retranslation: content });
+          if (this.state.input.trim()) {
+            this.setState({ retranslation: content });
+          }
           break;
 
         case "message":
@@ -37,14 +39,15 @@ export default class Chat extends React.Component {
     const value = e.target.value.trim();
     this.lastInputTime = new Date().getTime();
 
+    if (!value) {
+      this.setState({ retranslation: null });
+      return;
+    }
+
     setTimeout(() => {
       if (new Date().getTime() - this.lastInputTime > 1000) {
-        if (value) {
-          this.network.send("input", value);
-          this.setState({ retranslation: "Loading ..." });
-        } else {
-          this.setState({ retranslation: null });
-        }
+        this.network.send("input", value);
+        this.setState({ retranslation: "Loading ..." });
       }
     }, 1000);
   };
@@ -53,7 +56,7 @@ export default class Chat extends React.Component {
     const message = this.state.input.trim();
     if (message) {
       this.network.send("message", message);
-      this.setState({ input: "" });
+      this.setState({ input: "", retranslation: null });
     }
   };
 
@@ -62,7 +65,9 @@ export default class Chat extends React.Component {
       <>
         <div id="messages">
           {this.state.messages.map((message, index) => (
-            <p key={index}>{message.text}</p>
+            <div className={"message " + (message.fromMe ? "from-me" : "")} key={index}>
+              {message.text}
+            </div>
           ))}
         </div>
         {this.state.retranslation && <div id="retranslation">{this.state.retranslation}</div>}

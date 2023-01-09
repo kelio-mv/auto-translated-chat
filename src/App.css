@@ -8,6 +8,7 @@
   --fs-medium: 18px;
   --fs-large: 20px;
   --fs-largest: 36px;
+  --border-radius: 8px;
 }
 
 * {
@@ -21,9 +22,24 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem;
+  padding: 1rem;
   background: var(--bg-primary);
   color: var(--clr-text);
   height: 100vh;
   font: var(--fs-medium) "Gantari", sans-serif;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-tertiary);
+  border-radius: var(--border-radius);
 }

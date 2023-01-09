@@ -1,5 +1,23 @@
 #messages {
-    flex: 1 0 auto;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    overflow-y: auto;
+}
+
+#messages .message {
+    max-width: 90%;
+    background: var(--bg-secondary);
+    padding: 6px 10px;
+    align-self: flex-start;
+    border-radius: var(--border-radius);
+}
+
+#messages .message.from-me {
+    align-self: flex-end;
 }
 
 #retranslation {
@@ -7,6 +25,7 @@
     width: calc(100% - 1rem);
     padding: 6px 10px;
     margin-bottom: 1rem;
+    border-radius: var(--border-radius);
 }
 
 #input-area {
@@ -14,6 +33,7 @@
     gap: 0.5rem;
     width: 100%;
     background: var(--bg-secondary);
+    border-radius: var(--border-radius);
 }
 
 #message-input {

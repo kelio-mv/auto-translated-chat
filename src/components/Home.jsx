@@ -20,7 +20,7 @@ export default function Home(props) {
   // Functions
   const connect = () => {
     setConnecting(true);
-    network.connect("35.203.125.207");
+    network.connect("auto-translated-text");
   };
 
   return (

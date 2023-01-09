@@ -3,7 +3,7 @@ import { WebSocketServer } from "ws";
 export default class Network {
   constructor(maxConnectedClients) {
     this.maxConnectedClients = maxConnectedClients || Infinity;
-    this.defaultPort = 2824;
+    this.defaultPort = 5000;
     this.clients = [];
     this.onconnection = () => {};
     this.onmessage = () => {};

@@ -1,5 +1,5 @@
 import Network from "./network.js";
-import { translateText, retranslateText } from "./translate.js";
+import { translate, retranslate } from "./translate.js";
 
 const getMate = (client) => network.clients.filter((c) => c !== client)[0];
 
@@ -17,14 +17,14 @@ network.onmessage = (client, message) => {
       break;
 
     case "input":
-      retranslateText(message.content, client.lang, getMate(client).lang).then((res) =>
+      retranslate(message.content, client.lang, getMate(client).lang).then((res) =>
         client.send("input-retranslated", res)
       );
       break;
 
     case "message":
       client.send("message", { fromMe: true, text: message.content });
-      translateText(message.content, client.lang, getMate(client).lang).then((res) =>
+      translate(message.content, client.lang, getMate(client).lang).then((res) =>
         getMate(client).send("message", { fromMe: false, text: res })
       );
       break;
