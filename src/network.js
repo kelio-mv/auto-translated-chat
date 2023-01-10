@@ -3,8 +3,9 @@ export default class Network {
     // this.defaultPort = 5000;
     this.active = false;
     this.onopen = () => {};
-    this.onmessage = () => {};
     this.onerror = () => {};
+    this.onmessage = () => {};
+    this.onclose = () => {};
     setInterval(this.checkState, 3000);
   }
 
@@ -24,21 +25,21 @@ export default class Network {
     this.onopen();
   };
 
+  _onerror = () => {
+    console.log("[Network] Connection error!");
+    this.onerror();
+  };
+
   _onmessage = (event) => {
     // console.log(`[Received] ${event.data}`)
     this.onmessage(...JSON.parse(event.data));
-  };
-
-  _onerror = () => {
-    console.log("[Network] Connection failed!");
-    this.onerror();
   };
 
   checkState = () => {
     if (this.active && this.socket.readyState !== this.socket.OPEN) {
       console.log("[Network] Connection lost.");
       this.active = false;
-      this.onerror();
+      this.onclose();
     }
   };
 

@@ -8,7 +8,7 @@ const network = new Network();
 
 export default function App() {
   const [connected, setConnected] = useState(false);
-  let language;
+  const [language, setLanguage] = useState(null);
 
   return (
     <>
@@ -16,8 +16,8 @@ export default function App() {
         <Home
           network={network}
           onConnect={(lang) => {
-            language = lang;
-            network.send("lang", language);
+            network.send("lang", lang);
+            setLanguage(lang);
             setConnected(true);
           }}
         />

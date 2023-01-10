@@ -3,7 +3,7 @@ import "./Chat.css";
 
 export default class Chat extends React.Component {
   constructor(props) {
-    super();
+    super(props);
     this.network = props.network;
     this.state = {
       messages: [],
@@ -19,8 +19,12 @@ export default class Chat extends React.Component {
   componentDidMount() {
     this.network.onmessage = (tag, content) => {
       switch (tag) {
-        case "someone-is-online":
-          this.setState({ chatEnabled: true });
+        case "mate-online":
+          if (content) {
+            this.setState({ chatEnabled: true, retranslation: null });
+          } else {
+            this.setState({ chatEnabled: false, input: "", retranslation: null });
+          }
           break;
 
         case "input-retranslated":
@@ -36,7 +40,27 @@ export default class Chat extends React.Component {
           );
       }
     };
-    this.network.send("is-someone-online");
+    this.network.send("is-mate-online");
+    // If a Safari user lefts the app then try to reconnect (Experimental feature)
+    // Is it triggered immediately when the user lefts, when the app is focused,
+    // or only when they try to send a message ?
+    this.network.onclose = () => {
+      this.setState({ chatEnabled: false, retranslation: "[Trying to reconnect...]" });
+      this.network.connect("auto-translated-text");
+
+      this.network.onopen = () => {
+        this.network.send("lang", this.props.language);
+        this.network.send("is-mate-online");
+      };
+    };
+    // Keep websocket connected by sending a message every 30 seconds.
+    this.keepConnection = setInterval(() => {
+      this.network.send("keep-connection");
+    }, 30000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.keepConnection);
   }
 
   handleInput = (e) => {
