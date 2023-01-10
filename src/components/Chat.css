@@ -2,9 +2,10 @@
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: var(--spacing-medium);
     width: 100%;
-    margin-bottom: 1rem;
+    padding: var(--spacing-medium);
+    border-bottom: 1px solid var(--bg-tertiary);
     overflow-y: auto;
 }
 
@@ -22,16 +23,21 @@
 
 #retranslation {
     background: var(--bg-tertiary);
-    width: calc(100% - 1rem);
+    width: calc(100% - 2*var(--spacing-medium));
     padding: 6px 10px;
-    margin-bottom: 1rem;
+    margin-top: var(--spacing-medium);
     border-radius: var(--border-radius);
+    font-size: var(--fs-small);
+    color: var(--clr-text-dark);
+    word-wrap: break-word;
+    /* overflow-x: hidden; */
 }
 
 #input-area {
     display: flex;
     gap: 0.5rem;
-    width: 100%;
+    width: calc(100% - 2*var(--spacing-medium));
+    margin: var(--spacing-medium) 0px;
     background: var(--bg-secondary);
     border-radius: var(--border-radius);
 }

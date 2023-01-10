@@ -12,6 +12,8 @@ export default class Chat extends React.Component {
       retranslation: null,
     };
     this.lastInputTime = null;
+    this.messagesRef = React.createRef();
+    this.inputRef = React.createRef();
   }
 
   componentDidMount() {
@@ -28,7 +30,10 @@ export default class Chat extends React.Component {
           break;
 
         case "message":
-          this.setState({ messages: [...this.state.messages, content] });
+          this.setState(
+            { messages: [...this.state.messages, content] },
+            () => (this.messagesRef.current.scrollTop = this.messagesRef.current.scrollHeight)
+          );
       }
     };
     this.network.send("is-someone-online");
@@ -44,42 +49,47 @@ export default class Chat extends React.Component {
       return;
     }
 
-    setTimeout(() => {
+    this.retranslationTimeout = setTimeout(() => {
       if (new Date().getTime() - this.lastInputTime > 1000) {
         this.network.send("input", value);
-        this.setState({ retranslation: "Loading ..." });
+        this.setState({ retranslation: "[Loading retranslation...]" });
       }
     }, 1000);
   };
 
   sendMessage = () => {
+    clearTimeout(this.retranslationTimeout);
+
     const message = this.state.input.trim();
     if (message) {
       this.network.send("message", message);
       this.setState({ input: "", retranslation: null });
     }
+    this.inputRef.current.focus();
   };
 
   render() {
     return (
       <>
-        <div id="messages">
+        <div id="messages" ref={this.messagesRef}>
           {this.state.messages.map((message, index) => (
             <div className={"message " + (message.fromMe ? "from-me" : "")} key={index}>
               {message.text}
             </div>
           ))}
         </div>
-        {this.state.retranslation && <div id="retranslation">{this.state.retranslation}</div>}
+        <div id="retranslation">{this.state.retranslation || "[Retranslated message]"}</div>
         <div id="input-area">
           <input
             id="message-input"
+            ref={this.inputRef}
             type="text"
             placeholder={
               this.state.chatEnabled ? "Message..." : "Waiting for someone to join the chat..."
             }
             value={this.state.input}
             onInput={this.handleInput}
+            onKeyDown={(e) => e.key === "Enter" && this.sendMessage()}
             disabled={!this.state.chatEnabled}
           ></input>
           <div id="send-message-btn" onClick={this.sendMessage}>
