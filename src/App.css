@@ -21,6 +21,13 @@
   padding: 0;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+  font: var(--fs-medium) "Gantari", sans-serif;
+}
+
 #root {
   display: flex;
   flex-direction: column;
@@ -28,8 +35,6 @@
   justify-content: center;
   background: var(--bg-primary);
   color: var(--clr-text);
-  height: 100vh;
-  font: var(--fs-medium) "Gantari", sans-serif;
 }
 
 /* Scrollbar */

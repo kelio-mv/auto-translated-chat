@@ -27,7 +27,7 @@ export default function Home(props) {
     <>
       <h1 id="app-title">Auto-translated Chat</h1>
       <h2 id="label-select-lang">Select your language</h2>
-      <Select>
+      <Select id="lang-selector">
         {languages.map((lang, index) => (
           <Option
             key={index}

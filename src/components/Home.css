@@ -1,12 +1,16 @@
 #app-title {
     font-size: var(--fs-largest);
-    margin-bottom: 1em;
+    margin-bottom: 2em;
 }
 
 #label-select-lang {
     font-size: var(--fs-large);
     font-weight: 500;
     margin-bottom: 1em;
+}
+
+#lang-selector {
+    margin-bottom: calc(2 * var(--fs-largest));
 }
 
 button {

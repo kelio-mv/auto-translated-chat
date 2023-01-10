@@ -78,7 +78,14 @@ export default class Chat extends React.Component {
             </div>
           ))}
         </div>
-        <div id="retranslation">{this.state.retranslation || "[Retranslated message]"}</div>
+        <div id="retranslation">
+          {this.state.retranslation || "[Retranslated message]"}
+          <img
+            src="fullscreen.png"
+            alt="fullscreen"
+            onClick={() => document.documentElement.requestFullscreen({ navigationUI: "show" })}
+          />
+        </div>
         <div id="input-area">
           <input
             id="message-input"

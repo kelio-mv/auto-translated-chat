@@ -22,6 +22,9 @@
 }
 
 #retranslation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background: var(--bg-tertiary);
     width: calc(100% - 2*var(--spacing-medium));
     padding: 6px 10px;
@@ -30,7 +33,11 @@
     font-size: var(--fs-small);
     color: var(--clr-text-dark);
     word-wrap: break-word;
-    /* overflow-x: hidden; */
+}
+
+#retranslation img {
+    width: 23px;
+    cursor: pointer;
 }
 
 #input-area {

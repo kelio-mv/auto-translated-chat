@@ -1,7 +1,11 @@
 import "./Select.css";
 
 export function Select(props) {
-  return <div className={"select " + (props.disabled ? "disabled" : "")}>{props.children}</div>;
+  return (
+    <div id={props.id} className={"select " + (props.disabled ? "disabled" : "")}>
+      {props.children}
+    </div>
+  );
 }
 
 export function Option(props) {
