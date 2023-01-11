@@ -5,7 +5,10 @@ export default function Message(props) {
   const showTranslated = !props.fromMe || props.expanded;
 
   return (
-    <div className={"message " + (props.fromMe ? "from-me" : "")} onClick={props.toggleExpanded}>
+    <div
+      className={"message " + (props.fromMe ? "from-me " : "") + (props.expanded ? "expanded" : "")}
+      onClick={props.toggleExpanded}
+    >
       {showOriginal && (
         <div className="original-message">
           <p>{props.original}</p>
