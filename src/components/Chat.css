@@ -10,36 +10,10 @@
     overflow-y: auto;
 }
 
-/* Message */
-#messages .message {
-    max-width: min(85%, 600px);
-    align-self: flex-start;
-    word-wrap: break-word;
-}
-
-#messages .message.from-me {
-    align-self: flex-end;
-}
-
-#messages .message>* {
-    padding: 7px 11px;
-}
-
-#messages .original-message {
-    background: var(--bg-secondary);
-    border-radius: var(--border-radius) var(--border-radius) 0px 0px;
-}
-
-#messages .translated-message {
-    background: var(--bg-tertiary);
-    border-radius: 0px 0px var(--border-radius) var(--border-radius);
-}
+/* Message stylesheets are in Message.css */
 
 /* Retranslation area */
 #retranslation {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     background: var(--bg-tertiary);
     width: calc(100% - 2*var(--spacing-medium));
     padding: 6px 10px;
@@ -48,11 +22,6 @@
     font-size: var(--fs-small);
     color: var(--clr-text-dark);
     word-wrap: break-word;
-}
-
-#retranslation img {
-    width: 23px;
-    cursor: pointer;
 }
 
 /* Input area */

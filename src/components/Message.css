@@ -1,0 +1,34 @@
+#messages .message {
+    min-width: 50px;
+    max-width: min(85%, 600px);
+    border-radius: var(--border-radius);
+    align-self: flex-start;
+    word-wrap: break-word;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#messages .message.from-me {
+    align-self: flex-end;
+}
+
+#messages .message>* {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-small);
+    padding: 7px 11px;
+}
+
+#messages .original-message {
+    background: var(--bg-secondary);
+}
+
+#messages .translated-message {
+    background: var(--bg-tertiary);
+}
+
+#messages img {
+    width: var(--spacing-medium);
+    opacity: 0.5;
+}
