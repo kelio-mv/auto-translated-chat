@@ -25,10 +25,15 @@ network.onmessage = (client, message) => {
     case "message":
       if (network.clients.length === 1) return;
 
-      client.send("message", { fromMe: true, text: message.content });
-      translate(message.content, client.lang, getMate(client).lang).then((res) =>
-        getMate(client).send("message", { fromMe: false, text: res })
-      );
+      translate(message.content, client.lang, getMate(client).lang).then((res) => {
+        const content = { original: message.content, translated: res };
+        client.send("message", { fromMe: true, ...content });
+        getMate(client).send("message", { fromMe: false, ...content });
+      });
+      // client.send("message", { fromMe: true, text: message.content });
+      // translate(message.content, client.lang, getMate(client).lang).then((res) =>
+      //   getMate(client).send("message", { fromMe: false, text: res })
+      // );
       break;
   }
 };

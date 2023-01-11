@@ -1,3 +1,4 @@
+/* Messages area */
 #messages {
     flex: 1 1 auto;
     display: flex;
@@ -9,18 +10,32 @@
     overflow-y: auto;
 }
 
+/* Message */
 #messages .message {
-    max-width: 90%;
-    background: var(--bg-secondary);
-    padding: 6px 10px;
+    max-width: min(85%, 600px);
     align-self: flex-start;
-    border-radius: var(--border-radius);
+    word-wrap: break-word;
 }
 
 #messages .message.from-me {
     align-self: flex-end;
 }
 
+#messages .message>* {
+    padding: 7px 11px;
+}
+
+#messages .original-message {
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius) var(--border-radius) 0px 0px;
+}
+
+#messages .translated-message {
+    background: var(--bg-tertiary);
+    border-radius: 0px 0px var(--border-radius) var(--border-radius);
+}
+
+/* Retranslation area */
 #retranslation {
     display: flex;
     align-items: center;
@@ -40,6 +55,7 @@
     cursor: pointer;
 }
 
+/* Input area */
 #input-area {
     display: flex;
     gap: 0.5rem;

@@ -92,23 +92,33 @@ export default class Chat extends React.Component {
     this.inputRef.current.focus();
   };
 
+  requestFullscreen = () => {
+    const root = document.getElementById("root");
+    if (root.requestFullscreen) {
+      root.requestFullscreen({ navigationUI: "show" });
+    } else if (root.webkitRequestFullscreen) {
+      /* Safari (Experimental feature) */
+      root.webkitRequestFullscreen({ navigationUI: "show" });
+    }
+  };
+
   render() {
     return (
       <>
         <div id="messages" ref={this.messagesRef}>
           {this.state.messages.map((message, index) => (
+            // <div className={"message " + (message.fromMe ? "from-me" : "")} key={index}>
+            //   {message.text}
+            // </div>
             <div className={"message " + (message.fromMe ? "from-me" : "")} key={index}>
-              {message.text}
+              <div className="original-message">{message.original}</div>
+              <div className="translated-message">{message.translated}</div>
             </div>
           ))}
         </div>
         <div id="retranslation">
           {this.state.retranslation || "[Retranslated message]"}
-          <img
-            src="fullscreen.png"
-            alt="fullscreen"
-            onClick={() => document.documentElement.requestFullscreen({ navigationUI: "show" })}
-          />
+          <img src="fullscreen.png" alt="fullscreen" onClick={this.requestFullscreen} />
         </div>
         <div id="input-area">
           <input
