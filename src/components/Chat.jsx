@@ -41,33 +41,48 @@ export default class Chat extends React.Component {
           );
       }
     };
+    // Ask server if the mate is online
     this.network.send("is-mate-online");
-    // If a Safari user lefts the app then try to reconnect (Experimental feature)
-    // Is it triggered immediately when the user lefts, when the app is focused,
-    // or only when they try to send a message ?
+
+    // Keep websocket connected by sending a message every 30 seconds.
+    this.keepConnection = setInterval(() => this.network.send("keep-connection"), 30000);
+
+    // If the connection is lost, disable input and alert user
     this.network.onclose = () => {
-      this.setState({ chatEnabled: false, retranslation: "[Trying to reconnect...]" });
+      this.setState({
+        chatEnabled: false,
+        retranslation: "[Connection lost. Click anywhere to reconnect]",
+      });
+    };
+
+    // When window is focused or clicked, check if connection is active so that
+    // if the user got disconnected, it gets reconnected by user interaction.
+    window.onfocus = this.checkConnection;
+    window.onclick = this.checkConnection;
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.keepConnection);
+    window.onfocus = () => {};
+    window.onclick = () => {};
+  }
+
+  checkConnection = () => {
+    if (!this.network.connected && !this.network.connecting) {
+      this.setState({ retranslation: "[Trying to reconnect...]" });
       this.network.connect("auto-translated-text");
 
       this.network.onopen = () => {
         this.network.send("lang", this.props.language);
         this.network.send("is-mate-online");
       };
-    };
-    // Keep websocket connected by sending a message every 30 seconds.
-    this.keepConnection = setInterval(() => {
-      this.network.send("keep-connection");
-    }, 30000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.keepConnection);
-  }
+    }
+  };
 
   handleInput = (e) => {
     this.setState({ input: e.target.value });
-    const value = e.target.value.trim();
     this.lastInputTime = new Date().getTime();
+    const value = e.target.value.trim();
 
     if (!value) {
       this.setState({ retranslation: null });

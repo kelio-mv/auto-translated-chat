@@ -1,7 +1,8 @@
 export default class Network {
   constructor() {
     // this.defaultPort = 5000;
-    this.active = false;
+    this.connected = false;
+    this.connecting = false;
     this.onopen = () => {};
     this.onerror = () => {};
     this.onmessage = () => {};
@@ -10,23 +11,30 @@ export default class Network {
   }
 
   connect = (address, port) => {
-    // this.address = `ws://${address}:${port || this.defaultPort}`;
-    // this.socket = new WebSocket(this.address);
+    if (this.connecting) {
+      console.log("[Network] Please wait! You are already connecting.");
+      return;
+    }
+    this.connecting = true;
     this.address = `wss://${address}.glitch.me/`;
     this.socket = new WebSocket(this.address);
     this.socket.onopen = this._onopen;
     this.socket.onmessage = this._onmessage;
     this.socket.onerror = this._onerror;
+    // this.address = `ws://${address}:${port || this.defaultPort}`;
+    // this.socket = new WebSocket(this.address);
   };
 
   _onopen = () => {
     console.log(`[Network] Connected to ${this.address}`);
-    this.active = true;
+    this.connected = true;
+    this.connecting = false;
     this.onopen();
   };
 
   _onerror = () => {
     console.log("[Network] Connection error!");
+    this.connecting = false;
     this.onerror();
   };
 
@@ -36,9 +44,9 @@ export default class Network {
   };
 
   checkState = () => {
-    if (this.active && this.socket.readyState !== this.socket.OPEN) {
+    if (this.connected && this.socket.readyState !== this.socket.OPEN) {
       console.log("[Network] Connection lost.");
-      this.active = false;
+      this.connected = false;
       this.onclose();
     }
   };
@@ -46,7 +54,7 @@ export default class Network {
   send = (tag, content) => {
     this.checkState();
 
-    if (!this.active) {
+    if (!this.connected) {
       console.log("[Network] Please connect to a server before sending messages!");
       return;
     }
