@@ -7,7 +7,7 @@ export default class Chat extends React.Component {
     super(props);
     this.network = props.network;
     this.state = {
-      messages: [],
+      messages: localStorage.messages ? JSON.parse(localStorage.messages) : [],
       chatEnabled: false,
       input: "",
       retranslation: null,
@@ -35,10 +35,10 @@ export default class Chat extends React.Component {
           break;
 
         case "message":
-          this.setState(
-            { messages: [...this.state.messages, { ...content, expanded: false }] },
-            () => (this.messagesRef.current.scrollTop = this.messagesRef.current.scrollHeight)
-          );
+          this.setState({ messages: [...this.state.messages, content] }, () => {
+            this.messagesRef.current.scrollTop = this.messagesRef.current.scrollHeight;
+            this.storeMessages();
+          });
       }
     };
     // Ask server if the mate is online
@@ -66,6 +66,12 @@ export default class Chat extends React.Component {
     window.onfocus = () => {};
     window.onclick = () => {};
   }
+
+  storeMessages = () => {
+    const minifiedMessages = [...this.state.messages];
+    minifiedMessages.forEach((message) => delete message.expanded);
+    localStorage.messages = JSON.stringify(minifiedMessages);
+  };
 
   checkConnection = () => {
     if (!this.network.connected && !this.network.connecting) {
