@@ -54,6 +54,7 @@
     cursor: pointer;
 }
 
+#clear-history-btn,
 #send-message-btn img {
     width: 23px;
 }

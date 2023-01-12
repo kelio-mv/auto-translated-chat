@@ -1,6 +1,6 @@
 #app-title {
     font-size: var(--fs-largest);
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 
 #label-select-lang {
@@ -10,11 +10,12 @@
 }
 
 #lang-selector {
-    margin-bottom: calc(2 * var(--fs-largest));
+    margin-bottom: var(--fs-largest);
 }
 
 button {
     padding: 6px 36px;
+    margin-bottom: 1em;
     background: var(--bg-secondary);
     color: inherit;
     border: 2px solid var(--bg-tertiary);
@@ -31,4 +32,16 @@ button:disabled {
 button:hover:not(:disabled) {
     background: var(--bg-tertiary);
     cursor: pointer;
+}
+
+#delete-messages {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-small);
+    padding: 6px 12px;
+    font-size: var(--fs-medium);
+}
+
+#delete-messages img {
+    width: var(--fs-medium)
 }

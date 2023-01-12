@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Select, Option } from "./Select";
+import languages from "./languages";
 import "./Home.css";
 
 export default function Home(props) {
@@ -11,16 +12,16 @@ export default function Home(props) {
   // Variables
   const [language, setLanguage] = useState(null);
   const [connecting, setConnecting] = useState(false);
-  const languages = [
-    { name: "English", id: "en" },
-    { name: "Portuguese", id: "pt" },
-    { name: "Arabic", id: "ar" },
-  ];
 
   // Functions
   const connect = () => {
     setConnecting(true);
     network.connect("auto-translated-text");
+  };
+
+  const deleteMessages = () => {
+    localStorage.messages = "[]";
+    alert("All the messages were deleted!");
   };
 
   return (
@@ -39,6 +40,9 @@ export default function Home(props) {
       </Select>
       <button disabled={language === null || connecting} onClick={connect}>
         Join
+      </button>
+      <button id="delete-messages" onClick={deleteMessages}>
+        <img src="trash.png" alt="trash" /> Delete messages
       </button>
     </>
   );

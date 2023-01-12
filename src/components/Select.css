@@ -1,7 +1,8 @@
 .select {
     display: flex;
-    width: max-content;
-    gap: 1rem;
+    flex-direction: column;
+    height: calc(6.5 * 34.3906px);
+    overflow: auto;
 }
 
 .select.disabled {

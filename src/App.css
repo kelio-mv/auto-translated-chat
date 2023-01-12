@@ -9,10 +9,11 @@
   --fs-small: 16px;
   --fs-medium: 17px;
   --fs-large: 20px;
-  --fs-largest: 36px;
+  --fs-largest: 32px;
   --border-radius: 8px;
   --spacing-small: 7px;
   --spacing-medium: 12px;
+  --line-height: 1.2;
 }
 
 * {
@@ -27,6 +28,7 @@ body,
 #root {
   height: 100%;
   font: var(--fs-medium) "Gantari", sans-serif;
+  line-height: var(--line-height);
 }
 
 #root {
@@ -36,6 +38,7 @@ body,
   justify-content: center;
   background: var(--bg-primary);
   color: var(--clr-text);
+  overflow: hidden;
 }
 
 /* Scrollbar */

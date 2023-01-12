@@ -130,7 +130,9 @@ export default class Chat extends React.Component {
             />
           ))}
         </div>
+
         <div id="retranslation">{this.state.retranslation || "[Retranslated message]"}</div>
+
         <div id="input-area">
           <input
             id="message-input"
