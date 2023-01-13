@@ -37,6 +37,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <>
+        <img id="app-icon" src="app-icon.png" alt="app icon" />
         <h1 id="app-title">Auto-translated Chat</h1>
         <h2 id="label-select-lang">Select your language</h2>
         <Select id="lang-selector">
