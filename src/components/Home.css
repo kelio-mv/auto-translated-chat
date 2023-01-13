@@ -22,7 +22,7 @@
 
 #app-title {
     font-size: var(--fs-largest);
-    margin-bottom: 1.5em;
+    margin-bottom: 2em;
 }
 
 #label-select-lang {
@@ -32,7 +32,7 @@
 }
 
 #lang-selector {
-    margin-bottom: calc(1.5 * var(--fs-largest));
+    margin-bottom: calc(2 * var(--fs-largest));
 }
 
 #room-input {
