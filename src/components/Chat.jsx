@@ -7,7 +7,7 @@ export default class Chat extends React.Component {
     super(props);
     this.network = props.network;
     this.state = {
-      messages: localStorage.messages ? JSON.parse(localStorage.messages) : [],
+      messages: this.getMessages(),
       chatEnabled: false,
       input: "",
       retranslation: null,
@@ -67,10 +67,16 @@ export default class Chat extends React.Component {
     window.onclick = () => {};
   }
 
+  getMessages = () => {
+    const key = `room_${localStorage.room}`;
+    return localStorage[key] ? JSON.parse(localStorage[key]) : [];
+  };
+
   storeMessages = () => {
+    const key = `room_${localStorage.room}`;
     const minifiedMessages = [...this.state.messages];
     minifiedMessages.forEach((message) => delete message.expanded);
-    localStorage.messages = JSON.stringify(minifiedMessages);
+    localStorage[key] = JSON.stringify(minifiedMessages);
   };
 
   checkConnection = () => {
@@ -79,7 +85,8 @@ export default class Chat extends React.Component {
       this.network.connect("auto-translated-text");
 
       this.network.onopen = () => {
-        this.network.send("lang", this.props.language);
+        const { language, room } = localStorage;
+        this.network.send("join", { language, room });
         this.network.send("is-mate-online");
       };
     }
@@ -101,6 +108,12 @@ export default class Chat extends React.Component {
         this.setState({ retranslation: "[Loading retranslation...]" });
       }
     }, 1000);
+  };
+
+  deleteMessages = () => {
+    const key = `room_${localStorage.room}`;
+    localStorage.removeItem(key);
+    this.setState({ messages: [] });
   };
 
   sendMessage = () => {
@@ -130,23 +143,28 @@ export default class Chat extends React.Component {
             />
           ))}
         </div>
-
-        <div id="retranslation">{this.state.retranslation || "[Retranslated message]"}</div>
-
+        <div id="retranslation">
+          {this.state.retranslation || "[Retranslated message]"}
+        </div>
         <div id="input-area">
+          <div className="btn" onClick={this.deleteMessages}>
+            <img src="trash.png" alt="trash" />
+          </div>
           <input
             id="message-input"
             ref={this.inputRef}
             type="text"
             placeholder={
-              this.state.chatEnabled ? "Message..." : "Waiting for someone to join the chat..."
+              this.state.chatEnabled
+                ? "Message..."
+                : "Waiting for someone to join the chat..."
             }
             value={this.state.input}
             onInput={this.handleInput}
             onKeyDown={(e) => e.key === "Enter" && this.sendMessage()}
             disabled={!this.state.chatEnabled}
           ></input>
-          <div id="send-message-btn" onClick={this.sendMessage}>
+          <div className="btn" onClick={this.sendMessage}>
             <img src="send.png" alt="send message" />
           </div>
         </div>

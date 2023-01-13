@@ -20,11 +20,11 @@
 }
 
 #messages .original-message {
-    background: var(--bg-secondary);
+    background: var(--clr-bg-2);
 }
 
 #messages .translated-message {
-    background: var(--bg-tertiary);
+    background: var(--clr-bg-3);
 }
 
 #messages .expanded .original-message {

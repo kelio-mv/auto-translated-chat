@@ -1,6 +1,6 @@
 #app-title {
     font-size: var(--fs-largest);
-    margin-bottom: 1em;
+    margin-bottom: 2em;
 }
 
 #label-select-lang {
@@ -13,15 +13,24 @@
     margin-bottom: var(--fs-largest);
 }
 
+#room-input {
+    font: inherit;
+    width: 12em;
+    padding: 6px 10px;
+    background: transparent;
+    color: var(--clr-text-1);
+    border: 2px solid var(--clr-bg-4);
+    outline: none;
+    text-align: center;
+}
+
 button {
-    padding: 6px 36px;
-    margin-bottom: 1em;
-    background: var(--bg-secondary);
+    padding: 6px 24px;
+    background: var(--clr-bg-2);
     color: inherit;
-    border: 2px solid var(--bg-tertiary);
+    border: 2px solid var(--clr-bg-3);
     outline: none;
     font: inherit;
-    font-size: var(--fs-large);
     font-weight: 500;
 }
 
@@ -30,18 +39,6 @@ button:disabled {
 }
 
 button:hover:not(:disabled) {
-    background: var(--bg-tertiary);
+    background: var(--clr-bg-3);
     cursor: pointer;
-}
-
-#delete-messages {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-small);
-    padding: 6px 12px;
-    font-size: var(--fs-medium);
-}
-
-#delete-messages img {
-    width: var(--fs-medium)
 }

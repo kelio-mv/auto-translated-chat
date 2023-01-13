@@ -1,49 +1,70 @@
-import { useState } from "react";
+import React from "react";
 import { Select, Option } from "./Select";
-import languages from "./languages";
 import "./Home.css";
 
-export default function Home(props) {
-  // Network setup
-  const network = props.network;
-  network.onopen = () => props.onConnect(language);
-  network.onerror = () => setConnecting(false);
+export default class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      language: localStorage.language || null,
+      room: localStorage.room || "",
+      connecting: false,
+    };
+    // Define languages
+    this.languages = [
+      { name: "Arabic", id: "ar" },
+      { name: "English", id: "en" },
+      { name: "Portuguese", id: "pt" },
+      { name: "Spanish", id: "es" },
+    ];
+    // Setup network
+    this.network = props.network;
+    this.network.onopen = () => {
+      const { language, room } = this.state;
+      localStorage.language = language;
+      localStorage.room = room;
+      this.network.send("join", { language, room });
+      props.onConnect();
+    };
+    this.network.onerror = () => this.setState({ connecting: false });
+  }
 
-  // Variables
-  const [language, setLanguage] = useState(null);
-  const [connecting, setConnecting] = useState(false);
-
-  // Functions
-  const connect = () => {
-    setConnecting(true);
-    network.connect("auto-translated-text");
+  connect = () => {
+    this.setState({ connecting: true });
+    this.network.connect("auto-translated-text");
   };
 
-  const deleteMessages = () => {
-    localStorage.messages = "[]";
-    alert("All the messages were deleted!");
-  };
-
-  return (
-    <>
-      <h1 id="app-title">Auto-translated Chat</h1>
-      <h2 id="label-select-lang">Select your language</h2>
-      <Select id="lang-selector">
-        {languages.map((lang, index) => (
-          <Option
-            key={index}
-            text={lang.name}
-            selected={language === lang.id}
-            onClick={() => setLanguage(lang.id)}
+  render() {
+    return (
+      <>
+        <h1 id="app-title">Auto-translated Chat</h1>
+        <h2 id="label-select-lang">Select your language</h2>
+        <Select id="lang-selector">
+          {this.languages.map((lang, index) => (
+            <Option
+              key={index}
+              text={lang.name}
+              selected={this.state.language === lang.id}
+              onClick={() => this.setState({ language: lang.id })}
+            />
+          ))}
+        </Select>
+        <div>
+          <input
+            id="room-input"
+            type="text"
+            placeholder="Room name"
+            value={this.state.room}
+            onInput={(e) => this.setState({ room: e.target.value.replace(" ", "") })}
           />
-        ))}
-      </Select>
-      <button disabled={language === null || connecting} onClick={connect}>
-        Join
-      </button>
-      <button id="delete-messages" onClick={deleteMessages}>
-        <img src="trash.png" alt="trash" /> Delete messages
-      </button>
-    </>
-  );
+          <button
+            disabled={!this.state.language || !this.state.room || this.state.connecting}
+            onClick={this.connect}
+          >
+            Join
+          </button>
+        </div>
+      </>
+    );
+  }
 }

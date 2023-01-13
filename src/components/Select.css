@@ -1,8 +1,6 @@
 .select {
     display: flex;
-    flex-direction: column;
-    height: calc(6.5 * 34.3906px);
-    overflow: auto;
+    width: max-content;
 }
 
 .select.disabled {
@@ -12,15 +10,19 @@
 
 .select .option {
     padding: 6px 10px;
-    background: var(--bg-secondary);
-    border: 1px solid transparent;
+    background: var(--clr-bg-2);
+    border: 2px solid var(--clr-bg-3);
     cursor: pointer;
 }
 
+.select .option:not(:first-child) {
+    border-left: none;
+}
+
 .select .option:hover {
-    background: var(--bg-tertiary);
+    background: var(--clr-bg-3);
 }
 
 .select .option.selected {
-    border: 1px solid var(--clr-text);
+    border: 1px solid var(--clr-text-1);
 }
