@@ -21,7 +21,7 @@
     border-radius: var(--border-radius);
     font-size: var(--fs-small);
     color: var(--clr-text-2);
-    word-wrap: break-word;
+    word-break: break-all;
 }
 
 /* Input area */
@@ -36,6 +36,7 @@
 
 #message-input {
     flex: 1 0 auto;
+    width: 0;
     background: transparent;
     color: var(--clr-text-1);
     font: inherit;

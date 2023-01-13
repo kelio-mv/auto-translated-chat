@@ -2,7 +2,7 @@
     min-width: 50px;
     max-width: min(85%, 600px);
     align-self: flex-start;
-    word-wrap: break-word;
+    word-break: break-all;
     cursor: pointer;
 }
 
