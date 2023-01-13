@@ -38,6 +38,7 @@
 #room-input {
     width: 12em;
     padding: 6px 10px;
+    background: transparent;
     border: 2px solid var(--clr-bg-4);
     text-align: center;
 }

@@ -37,6 +37,7 @@
 #message-input {
     flex: 1 0 auto;
     width: 0;
+    background: transparent;
     border: none;
 }
 
