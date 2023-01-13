@@ -11,7 +11,7 @@
   --fs-medium: 17px;
   --fs-large: 20px;
   --fs-largest: 32px;
-  --border-radius: 8px;
+  --border-radius: 9px;
   --spacing-small: 7px;
   --spacing-medium: 12px;
 }
@@ -33,8 +33,10 @@ body,
 html {
   background: var(--clr-bg-1);
   font: var(--fs-medium) "Gantari", sans-serif;
+  color: var(--clr-text-1);
 }
 
+/* Center #root due to its size limits for a better experience in big screens */
 body {
   display: flex;
   align-items: center;
@@ -49,8 +51,14 @@ body {
   width: 100%;
   max-width: 1280px;
   max-height: 768px;
-  color: var(--clr-text-1);
   border: 1px solid var(--clr-bg-2);
+}
+
+.input {
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  outline: none;
 }
 
 /* Scrollbar */
@@ -64,5 +72,4 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: var(--clr-bg-4);
-  border-radius: var(--border-radius);
 }

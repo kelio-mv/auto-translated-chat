@@ -52,12 +52,15 @@ export default class Home extends React.Component {
         <div>
           <input
             id="room-input"
+            className="input"
             type="text"
             placeholder="Room name"
             value={this.state.room}
             onInput={(e) => this.setState({ room: e.target.value.replace(" ", "") })}
           />
           <button
+            id="join-btn"
+            className="input button"
             disabled={!this.state.language || !this.state.room || this.state.connecting}
             onClick={this.connect}
           >

@@ -16,3 +16,7 @@ export default function App() {
     </>
   );
 }
+
+// IDs used in the project
+// Home: #app-title  #label-select-lang  #lang-selector  #room-input  #join-btn
+// Chat: #messages  #retranslation  #input-area  #message-input

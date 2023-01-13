@@ -6,7 +6,9 @@ export default function Message(props) {
 
   return (
     <div
-      className={"message " + (props.fromMe ? "from-me " : "") + (props.expanded ? "expanded" : "")}
+      className={
+        "message " + (props.fromMe ? "from-me " : "") + (props.expanded ? "expanded" : "")
+      }
       onClick={props.toggleExpanded}
     >
       {showOriginal && (

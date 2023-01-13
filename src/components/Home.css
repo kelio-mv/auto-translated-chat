@@ -1,6 +1,23 @@
+/* Classes */
+.button {
+    padding: 6px 10px;
+    background: var(--clr-bg-2);
+    border: 2px solid var(--clr-bg-3);
+}
+
+.button:hover:not(:disabled) {
+    background: var(--clr-bg-3);
+    cursor: pointer;
+}
+
+.button:disabled {
+    opacity: 0.5;
+}
+
+/* IDs */
 #app-title {
     font-size: var(--fs-largest);
-    margin-bottom: 2em;
+    margin-bottom: 1.5em;
 }
 
 #label-select-lang {
@@ -10,35 +27,16 @@
 }
 
 #lang-selector {
-    margin-bottom: var(--fs-largest);
+    margin-bottom: calc(1.5 * var(--fs-largest));
 }
 
 #room-input {
-    font: inherit;
     width: 12em;
     padding: 6px 10px;
-    background: transparent;
-    color: var(--clr-text-1);
     border: 2px solid var(--clr-bg-4);
-    outline: none;
     text-align: center;
 }
 
-button {
+#join-btn {
     padding: 6px 24px;
-    background: var(--clr-bg-2);
-    color: inherit;
-    border: 2px solid var(--clr-bg-3);
-    outline: none;
-    font: inherit;
-    font-weight: 500;
-}
-
-button:disabled {
-    opacity: 0.5;
-}
-
-button:hover:not(:disabled) {
-    background: var(--clr-bg-3);
-    cursor: pointer;
 }

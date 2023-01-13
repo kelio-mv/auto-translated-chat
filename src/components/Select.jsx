@@ -11,7 +11,7 @@ export function Select(props) {
 export function Option(props) {
   return (
     <div
-      className={"option " + (props.selected ? "selected" : "")}
+      className={"option button " + (props.selected ? "selected" : "")}
       onClick={() => props.onClick(props.selected)}
     >
       {props.text}

@@ -14,10 +14,10 @@
 
 /* Retranslation area */
 #retranslation {
-    background: var(--clr-bg-3);
     width: calc(100% - 2*var(--spacing-medium));
     padding: 6px 10px;
     margin-top: var(--spacing-medium);
+    background: var(--clr-bg-3);
     border-radius: var(--border-radius);
     font-size: var(--fs-small);
     color: var(--clr-text-2);
@@ -37,14 +37,10 @@
 #message-input {
     flex: 1 0 auto;
     width: 0;
-    background: transparent;
-    color: var(--clr-text-1);
-    font: inherit;
     border: none;
-    outline: none;
 }
 
-#input-area .btn {
+.input-area-btn {
     flex: 0 0 auto;
     display: flex;
     justify-content: center;
@@ -54,6 +50,6 @@
     cursor: pointer;
 }
 
-#input-area .btn img {
+.input-area-btn img {
     width: 23px;
 }

@@ -1,26 +1,9 @@
 .select {
     display: flex;
-    width: max-content;
-}
-
-.select.disabled {
-    opacity: 0.5;
-    pointer-events: none;
-}
-
-.select .option {
-    padding: 6px 10px;
-    background: var(--clr-bg-2);
-    border: 2px solid var(--clr-bg-3);
-    cursor: pointer;
 }
 
 .select .option:not(:first-child) {
     border-left: none;
-}
-
-.select .option:hover {
-    background: var(--clr-bg-3);
 }
 
 .select .option.selected {
