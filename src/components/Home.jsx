@@ -14,6 +14,7 @@ export default class Home extends React.Component {
     this.languages = [
       { name: "Arabic", id: "ar" },
       { name: "English", id: "en" },
+      { name: "Finnish", id: "fi" },
       { name: "Portuguese", id: "pt" },
       { name: "Spanish", id: "es" },
     ];
