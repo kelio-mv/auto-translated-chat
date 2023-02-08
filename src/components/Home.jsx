@@ -17,6 +17,7 @@ export default class Home extends React.Component {
       { name: "Finnish", id: "fi" },
       { name: "Portuguese", id: "pt" },
       { name: "Spanish", id: "es" },
+      { name: "Turkish", id: "tr" },
     ];
     // Setup network
     this.network = props.network;
