@@ -12,12 +12,10 @@ export default class Home extends React.Component {
     };
     // Define languages
     this.languages = [
-      { name: "Arabic", id: "ar" },
       { name: "English", id: "en" },
-      { name: "Finnish", id: "fi" },
+      { name: "French", id: "fr" },
       { name: "Portuguese", id: "pt" },
       { name: "Spanish", id: "es" },
-      { name: "Turkish", id: "tr" },
     ];
     // Setup network
     this.network = props.network;
