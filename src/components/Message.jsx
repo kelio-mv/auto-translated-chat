@@ -6,21 +6,26 @@ export default function Message(props) {
 
   return (
     <div
-      className={
-        "message " + (props.fromMe ? "from-me " : "") + (props.expanded ? "expanded" : "")
-      }
+      className={"message " + (props.fromMe ? "from-me " : "") + (props.expanded ? "expanded" : "")}
       onClick={props.toggleExpanded}
     >
       {showOriginal && (
         <div className="original-message">
-          <p>{props.original}</p>
-          {props.fromMe && <img src="arrow-down.png" alt="arrow down" />}
+          <div className="content">
+            <p>{props.original}</p>
+            {props.fromMe && <img src="arrow-down.png" alt="arrow down" />}
+          </div>
         </div>
       )}
       {showTranslated && (
         <div className="translated-message">
-          {!props.fromMe && <img src="arrow-up.png" alt="arrow up" />}
-          <p>{props.translated}</p>
+          <div className="content">
+            {!props.fromMe && <img src="arrow-up.png" alt="arrow up" />}
+            <p>{props.translated}</p>
+          </div>
+          <div className="footer">
+            <p>Translated</p>
+          </div>
         </div>
       )}
     </div>

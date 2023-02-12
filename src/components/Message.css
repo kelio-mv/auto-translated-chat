@@ -12,11 +12,34 @@
 /* Both original and translated messages */
 #messages .message>* {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     gap: var(--spacing-small);
     padding: 7px 11px;
     border-radius: var(--border-radius);
+}
+
+#messages .message .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-small);
+}
+
+#messages .message .footer {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#messages .message.from-me .footer {
+    justify-content: flex-end;
+}
+
+#messages .message .footer p {
+    padding: 2px 5px;
+    color: var(--clr-text-2);
+    border: 1px solid var(--clr-text-2);
+    border-radius: 9999px;
+    font-size: 13px;
 }
 
 #messages .original-message {
